@@ -1,14 +1,359 @@
-
-
-<!DOCTYPE html>
-<html lang="fa">
+<!doctype html>
+<html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>کلاس‌یار</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ClasYar | درگاه هوشمند مدیریت آموزش</title>
+  <meta name="description" content="Clasyar نخستین درگاه هوشمند و تعاملی برای مدیریت دانشگاه‌ها، مدارس و آموزشگاه‌ها؛ ارتباط زنده‌ی اساتید، معلمان، مربیان، مدیران و والدین." />
+  <meta property="og:title" content="Clasyar | درگاه هوشمند مدیریت آموزش">
+  <meta property="og:description" content="گزارش لحظه‌ای، بایگانی دائمی، جست‌وجوی آنی و پوشش تمام مقاطع آموزشی.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://clasyar.ir/">
+  <meta property="og:image" content="https://clasyar.ir/icon.png">
+
+  <!-- اختیاری: فونت فارسی وزیرمتن (CDN امن) -->
+  <link href="https://cdn.jsdelivr.net/npm/vazirmatn@33.003/fonts/variable/FD/Vazirmatn[wght].min.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0f172a; /* slate-900 */
+      --card:#0b1227a6;
+      --primary:#7c3aed; /* violet-600 */
+      --primary-2:#06b6d4; /* cyan-500 */
+      --accent:#22c55e; /* green-500 */
+      --text:#e5e7eb; /* gray-200 */
+      --muted:#b8c0cc; /* gray-400 */
+      --glass:rgba(255,255,255,.06);
+      --border:rgba(255,255,255,.12);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Vazirmatn", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(1000px 700px at 110% -10%, #1e293b 10%, transparent 60%),
+                  radial-gradient(900px 600px at -20% -20%, #0ea5e9 0, transparent 55%),
+                  radial-gradient(900px 600px at 110% 120%, #8b5cf6 0, transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.75;
+    }
+
+    /* Header */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(160%) blur(10px);
+      background:linear-gradient(180deg, rgba(10,15,30,.72), rgba(10,15,30,.35));
+      border-bottom:1px solid var(--border);
+    }
+    .nav .wrap{
+      max-width:1100px; margin:auto; padding:12px 20px;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px;
+    }
+    .brand .logo{
+      width:38px; height:38px; display:grid; place-items:center;
+      background:linear-gradient(135deg, var(--primary), var(--primary-2));
+      border-radius:12px; color:white; font-weight:900; box-shadow:var(--shadow)
+    }
+    .nav a{
+      color:var(--text); text-decoration:none; font-weight:600; padding:8px 14px; border-radius:12px;
+    }
+    .nav a.btn{
+      background:linear-gradient(135deg, var(--primary), var(--primary-2));
+      color:white;
+    }
+    .nav a:hover{background:var(--glass)}
+
+    /* Hero */
+    .hero{
+      padding:80px 20px 40px;
+    }
+    .container{max-width:1100px; margin:auto}
+    .hero .grid{
+      display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center;
+    }
+    .title{
+      font-size:clamp(28px, 5.4vw, 48px);
+      line-height:1.25; margin:0 0 10px;
+    }
+    .subtitle{color:var(--muted); margin:0 0 22px; font-size:18px}
+    .cta{display:flex; gap:12px; flex-wrap:wrap}
+    .btn{
+      background:linear-gradient(135deg, var(--primary), var(--primary-2));
+      color:white; padding:12px 18px; border:none; border-radius:14px; cursor:pointer; font-weight:800;
+      box-shadow:var(--shadow)
+    }
+    .btn.secondary{
+      background:transparent; border:1px solid var(--border); color:var(--text)
+    }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow)
+    }
+    .mock{
+      aspect-ratio:4/3; display:grid; place-items:center; overflow:hidden;
+    }
+    .mock svg{width:90%; height:auto; opacity:.95; filter:drop-shadow(0 25px 30px rgba(0,0,0,.3))}
+    .badges{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap}
+    .badge{
+      border:1px dashed var(--border); border-radius:999px; padding:6px 12px; color:#d1fae5; background:rgba(34,197,94,.07); font-weight:700; font-size:13px
+    }
+
+    /* Features */
+    .section{padding:60px 20px}
+    .section h2{font-size:28px; margin:0 0 8px}
+    .section p.lead{color:var(--muted); margin:0 0 22px}
+
+    .features{
+      display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+    }
+    .feat{
+      padding:20px; position:relative; overflow:hidden;
+    }
+    .feat .icon{
+      width:42px; height:42px; border-radius:12px; display:grid; place-items:center;
+      background:linear-gradient(135deg, var(--primary), var(--primary-2)); margin-bottom:10px
+    }
+    .feat h3{margin:6px 0 8px; font-size:18px}
+    .feat p{color:var(--muted); margin:0}
+
+    /* Pillars for دانشگاه/مدرسه/آموزشگاه */
+    .pillars{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:18px}
+    .pillars .tile{padding:22px}
+    .tile h4{margin:0 0 8px}
+    .tile ul{margin:0; padding:0 18px; color:var(--muted); line-height:1.9}
+
+    /* Stats */
+    .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
+    .stat{
+      text-align:center; padding:20px 10px
+    }
+    .stat .num{font-size:24px; font-weight:900; color:white}
+    .stat .cap{color:var(--muted); font-size:13px}
+
+    /* CTA + Footer */
+    .cta-wide{
+      display:grid; grid-template-columns:1.2fr .8fr; gap:18px; align-items:center; padding:28px
+    }
+    .footer{padding:26px 20px; border-top:1px solid var(--border); color:var(--muted); text-align:center}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero .grid, .cta-wide{grid-template-columns:1fr}
+      .features{grid-template-columns:1fr 1fr}
+      .pillars{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 560px){
+      .features{grid-template-columns:1fr}
+    }
+  </style>
 </head>
 <body>
-  <h1>وب‌سایت رسمی KlassYar فعال شد ✅</h1>
-  <p>این صفحه آزمایشی است.</p>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="wrap">
+      <div class="brand">
+        <div class="logo">C</div>
+        <div>Clasyar</div>
+      </div>
+      <nav style="display:flex; gap:4px">
+        <a href="#features">ویژگی‌ها</a>
+        <a href="#pillars">کاربردها</a>
+        <a href="#contact" class="btn">شروع همکاری</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="grid">
+        <div>
+          <h1 class="title">درگاه هوشمند و تعاملی <span style="background:linear-gradient(90deg,var(--primary),var(--primary-2)); -webkit-background-clip:text; background-clip:text; color:transparent;">مدیریت آموزش</span></h1>
+          <p class="subtitle">
+            Clasyar ارتباط زنده میان <b>اساتید، معلمان، مربیان، مدیران و والدین</b> را ممکن می‌سازد؛
+            با گزارش‌های لحظه‌ای، بایگانی دائمی و جست‌وجوی آنی برای همه‌ی مقاطع از مدرسه تا دانشگاه.
+          </p>
+          <div class="cta">
+            <a class="btn" href="#contact">دمو و همکاری</a>
+            <a class="btn secondary" href="#features">آشنایی بیشتر</a>
+          </div>
+          <div class="badges">
+            <span class="badge">گزارش لحظه‌ای والدین</span>
+            <span class="badge">بایگانی دائمی سوابق</span>
+            <span class="badge">پوشش دانشگاه، مدرسه و آموزشگاه</span>
+          </div>
+        </div>
+
+        <div class="card mock" aria-label="پیش‌نمایش Clasyar">
+          <!-- Illustration -->
+          <svg viewBox="0 0 640 480" role="img" aria-label="UI Mock">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#8b5cf6"/>
+                <stop offset="1" stop-color="#06b6d4"/>
+              </linearGradient>
+            </defs>
+            <rect x="20" y="25" rx="18" width="600" height="430" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.15)"/>
+            <rect x="40" y="55" rx="12" width="200" height="24" fill="url(#g1)"/>
+            <rect x="40" y="100" rx="10" width="560" height="56" fill="rgba(255,255,255,.07)"/>
+            <rect x="40" y="170" rx="10" width="560" height="56" fill="rgba(255,255,255,.07)"/>
+            <rect x="40" y="240" rx="10" width="560" height="56" fill="rgba(255,255,255,.07)"/>
+            <rect x="40" y="310" rx="10" width="320" height="56" fill="rgba(34,197,94,.25)"/>
+            <rect x="380" y="310" rx="10" width="220" height="56" fill="rgba(139,92,246,.35)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="section container">
+    <h2>چرا Clasyar؟</h2>
+    <p class="lead">ترکیبی از سرعت، سادگی و تعامل انسانی برای مدیریت هوشمند آموزش.</p>
+
+    <div class="features">
+      <article class="card feat">
+        <div class="icon">📡</div>
+        <h3>گزارش‌ لحظه‌ای</h3>
+        <p>والدین در هر لحظه از وضعیت حضور و غیاب، نمرات و عملکرد فرزند خود مطلع می‌شوند.</p>
+      </article>
+
+      <article class="card feat">
+        <div class="icon">🗂️</div>
+        <h3>بایگانی دائمی</h3>
+        <p>تمام تاریخچه‌ی کلاس‌ها، ترم‌ها و سوابق آموزشی برای همیشه محفوظ و قابل بازیابی است.</p>
+      </article>
+
+      <article class="card feat">
+        <div class="icon">⚡</div>
+        <h3>جست‌وجوی آنی</h3>
+        <p>اطلاعات موردنیاز را در کسری از ثانیه پیدا کنید؛ بدون فرآیندهای پیچیده و زمان‌بر.</p>
+      </article>
+
+      <article class="card feat">
+        <div class="icon">👨‍🏫</div>
+        <h3>یکپارچه برای نقش‌ها</h3>
+        <p>پنل‌های ساده و دقیق برای اساتید، معلمان، مربیان، مدیران و والدین.</p>
+      </article>
+
+      <article class="card feat">
+        <div class="icon">🛡️</div>
+        <h3>شفاف و قابل‌اعتماد</h3>
+        <p>کاهش سوء‌تفاهم، افزایش پاسخگویی و بهبود کیفیت یادگیری با گردش اطلاعات شفاف.</p>
+      </article>
+
+      <article class="card feat">
+        <div class="icon">🧭</div>
+        <h3>ساده اما قدرتمند</h3>
+        <p>طراحی مینیمال با امکانات حرفه‌ای؛ مناسب از یک کلاس کوچک تا مجموعه‌های بزرگ.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section id="pillars" class="section container">
+    <h2>پوشش کامل مقاطع و مراکز آموزشی</h2>
+    <p class="lead">Clasyar برای دانشگاه‌ها، مدارس و آموزشگاه‌ها بهینه‌سازی شده است.</p>
+
+    <div class="pillars">
+      <div class="card tile">
+        <h4>دانشگاه</h4>
+        <ul>
+          <li>مدیریت ترم‌ها و گروه‌های درسی</li>
+          <li>دسترسی ویژه اساتید و دستیاران آموزشی</li>
+          <li>تحلیل روند نمرات و مشارکت دانشجویان</li>
+        </ul>
+      </div>
+      <div class="card tile">
+        <h4>مدرسه</h4>
+        <ul>
+          <li>حضور و غیاب لحظه‌ای و گزارش به والدین</li>
+          <li>ثبت ارزیابی‌های مستمر و کارنامه</li>
+          <li>پیام‌رسانی هدفمند مدیر به اولیا</li>
+        </ul>
+      </div>
+      <div class="card tile">
+        <h4>آموزشگاه</h4>
+        <ul>
+          <li>کلاس‌های کوتاه‌مدت و دوره‌های مهارتی</li>
+          <li>زمان‌بندی منعطف و مدیریت مربیان</li>
+          <li>پیگیری پیشرفت هنرجویان به‌صورت آنی</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="section container">
+    <div class="card" style="padding:22px">
+      <div class="stats">
+        <div class="stat">
+          <div class="num">⏱️ لحظه‌ای</div>
+          <div class="cap">گزارش وضعیت فراگیر</div>
+        </div>
+        <div class="stat">
+          <div class="num">∞</div>
+          <div class="cap">بایگانی دائمی و امن</div>
+        </div>
+        <div class="stat">
+          <div class="num">⚡ بسیار سریع</div>
+          <div class="cap">جست‌وجوی آنی اطلاعات</div>
+        </div>
+        <div class="stat">
+          <div class="num">🎓 جامع</div>
+          <div class="cap">دانشگاه، مدرسه، آموزشگاه</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WIDE CTA -->
+  <section id="contact" class="section container">
+    <div class="card cta-wide">
+      <div>
+        <h2>آماده‌ای آموزش را یک گام هوشمندتر کنی؟</h2>
+        <p class="lead">برای دریافت دمو و شروع همکاری با Clasyar، پیام بده تا در کوتاه‌ترین زمان با شما در ارتباط باشیم.</p>
+        <div class="cta">
+          <a class="btn" href="mailto:hello@clasyar.ir">درخواست دمو (ایمیل)</a>
+          <a class="btn secondary" href="#">راهنمای شروع سریع</a>
+        </div>
+      </div>
+      <div class="card" style="padding:18px">
+        <p style="margin:0; color:var(--muted)">اطلاعات تماس:</p>
+        <ul style="margin:10px 0 0; color:var(--text); line-height:2">
+          <li>ایمیل: <b>hello@clasyar.ir</b></li>
+          <li>وب‌سایت: <b>clasyar.ir</b></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    © <span id="y"></span> ClasYar — درگاه هوشمند مدیریت آموزش
+  </footer>
+
+  <script>
+    // سال جاری
+    document.getElementById('y').textContent = new Date().getFullYear();
+    // اسکرول نرم
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        if(id.length>1){
+          e.preventDefault();
+          document.querySelector(id).scrollIntoView({behavior:'smooth', block:'start'});
+        }
+      });
+    });
+  </script>
 </body>
 </html>
 

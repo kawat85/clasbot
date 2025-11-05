@@ -57,7 +57,26 @@
     li{margin:6px 0;color:#aab4ca}
     .divider{height:1px;background:#1e2a46;margin:22px 0}
     .legal{font-size:13px;line-height:2;color:#9eabc4}
-    @media (max-width:720px){ .two{grid-template-columns:1fr} .brand img{width:58px;height:58px} .brand .en{font-size:24px} }
+
+    /* استایل برای لوگوی اینماد */
+    .enamad-box {
+      margin-top: 12px;
+      background:#0f192c;
+      border-radius:12px;
+      padding:12px;
+      text-align:center;
+      border:1px solid #253458;
+    }
+    .enamad-box iframe {
+      border:none;
+      width:100px;
+      height:120px;
+    }
+    @media (max-width:720px){
+      .two{grid-template-columns:1fr}
+      .brand img{width:58px;height:58px}
+      .brand .en{font-size:24px}
+    }
   </style>
 
   <!-- Structured Data for SEO -->
@@ -90,7 +109,7 @@
       </div>
     </div>
     <div class="hero">
-      <span class="ribbon">درگاه نوین و آنی مدیریت کلاس در مدرسه، دانشگاه و آموزشگاه</span>
+      <span class="ribbon">درگاه نوین و آنی مدیریت مدرسه، دانشگاه و آموزشگاه</span>
       <h2>ارتباط تعاملی و لحظه‌ای میان <b>اساتید، معلمان، مربیان</b> و <b>والدین</b></h2>
       <p>
         والدین به‌صورت لحظه‌ای از وضعیت فرزند در مدرسه، دانشگاه یا آموزشگاه مطلع می‌شوند و
@@ -99,7 +118,7 @@
     </div>
   </header>
 
-  <!-- کارت‌های امکانات کلیدی -->
+  <!-- کارت‌ها -->
   <div class="grid">
     <article class="card">
       <img src="images/main-menu.jpg?v=1" alt="منوی اصلی ربات ClasYar" loading="lazy">
@@ -144,32 +163,13 @@
     </article>
   </div>
 
-  <!-- سایر بخش‌ها (حریم خصوصی، فوتر و ...) -->
-  <section class="wrap">
-    <h2>چرا ClasYar؟</h2>
-    <div class="two">
-      <div class="card" style="padding:16px">
-        <h3>اهداف</h3>
-        <p>ایجاد درگاه مدیریت نوین و آنی برای مراکز آموزشی، ارتقای شفافیت تحصیلی، تسهیل ارتباط دوطرفه و افزایش رضایت والدین و کادر آموزشی.</p>
-        <span class="pill">لحظه‌ای و تعاملی</span>
-        <span class="pill">نگهداری امن داده</span>
-        <span class="pill">ساده اما قدرتمند</span>
-      </div>
-      <div class="card" style="padding:16px">
-        <h3>بخش‌ها و نقش‌ها</h3>
-        <p>مدیر سامانه، مدیر کلاس، استاد/معلم/مربی، و والد. هر نقش دسترسی مشخصی دارد و عملیات ثبت/ویرایش با ثبت اثر ذخیره می‌شود.</p>
-        <span class="pill">ثبت اثر عملیات</span>
-        <span class="pill">اعلان به والدین</span>
-        <span class="pill">گزارش‌های آماده چاپ</span>
-      </div>
-    </div>
-  </section>
-
+  <!-- فراخوان -->
   <div class="cta">
     <a href="mailto:Support@clasyar.ir" class="btn">درخواست دمو / ارتباط با پشتیبانی</a>
     <a href="#contact" class="btn secondary" style="margin-right:8px">اطلاعات تماس</a>
   </div>
 
+  <!-- فوتر -->
   <footer id="contact">
     <div class="foot">
       <div class="cols">
@@ -177,7 +177,12 @@
           <h3 style="margin:0 0 8px">ClasYar</h3>
           <p>کلاس یار – هوشمندترین دستیار آموزشی ایران</p>
           <p><b>ایمیل پشتیبانی:</b> <a href="mailto:Support@clasyar.ir">Support@clasyar.ir</a></p>
+          <div class="enamad-box">
+            <!-- لوگوی رسمی اینماد -->
+            <iframe src="https://trustseal.enamad.ir/?id=YOUR_ENAMAD_CODE_HERE&Code=xxxxxxxxxxxxxxx" scrolling="no"></iframe>
+          </div>
         </div>
+
         <div>
           <h4 style="margin:0 0 8px">لینک‌های مهم</h4>
           <ul>
@@ -186,6 +191,7 @@
             <li><a href="#complaint">ثبت شکایت</a></li>
           </ul>
         </div>
+
         <div>
           <h4 style="margin:0 0 8px">کاربرد‌ها</h4>
           <ul>
@@ -195,6 +201,7 @@
           </ul>
         </div>
       </div>
+
       <div class="divider"></div>
       <small>© تمامی حقوق برای ClasYar محفوظ است.</small>
     </div>
